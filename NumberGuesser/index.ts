@@ -3,6 +3,8 @@
 import inquirer from "inquirer";
 import chalk from "chalk";
 import chalkAnimation from "chalk-animation";
+
+
 let generatedNumber = Math.round(Math.random() * 10);
 for (let i = 0; i < 3; i++) {
   const answers = await inquirer.prompt([
@@ -10,6 +12,17 @@ for (let i = 0; i < 3; i++) {
       name: "Userguess",
       type: "number",
       message: chalk.redBright("Enter your guess"),
+      validate : (Userguess)=>{
+        if(isNaN(Userguess)){
+          return "Please Enter a Number"
+        }
+        else if(Userguess > 10){
+          return "Please Enter a number below the range of 10"
+        }
+        else{
+          return true
+        }
+      }
     },
   ]);
 
